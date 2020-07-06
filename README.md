@@ -1,4 +1,4 @@
-# CPP 
+# Iniciando o jitsi 
 
 Para iniciar este container basta:
 
@@ -17,6 +17,31 @@ Roda o comando abaixo para gerar as senhas seguras:
 Inicie o jitsi com o comando abaixo se for utilizar ele no `traefik`:
 
 `docker-compose -f docker-compose.traefik.yml up -d --build`
+
+# Instalando módulos personalizáveis:
+
+Para instalar os seus próprios módulos, faça um link da sua pasta de módulos com a pasta de módulos deste container, exemplo:
+
+`sudo ln -s ~/projetos/conferencia/prosody ~/.jitsi-meet-cfg/prosody/prosody-plugins-custom`
+
+Após isso, edite o arquivo `~/.jitsi-meet-cfg/prosody/config/conf.d/jitsi-meet.cfg.lua` e adicione o nome do seu módulo na lista de módulos ativados:
+
+```
+Component "muc.meet.jitsi" "muc"
+    ...
+    modules_enabled = {
+        ...
+        "nome_do_seu_modulo";
+        ...
+    }
+    ...
+```
+
+Após isso recrie o container do `prosody`:
+```shell script
+docker-compose stop prosody
+docker-compose -f docker-compose.traefik.yml up -d --build prosody
+```
 
 # Jitsi Meet on Docker
 
