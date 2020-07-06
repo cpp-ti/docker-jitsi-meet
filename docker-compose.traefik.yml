@@ -8,16 +8,14 @@ services:
         restart: ${RESTART_POLICY}
         expose:
             - "80"
-            - "443"
         labels:
             - traefik.enable=true
-            - traefik.http.routers.jitsi.entrypoints=http,https
             - traefik.http.routers.jitsi.rule=Host(`meet.cpp-ti.com.br`)
             - traefik.http.routers.jitsi.tls.certresolver=letsencrypt
+            - traefik.http.routers.jitsi.entrypoints=http,https
             - traefik.http.services.jitsi.loadbalancer.server.port=80
         volumes:
             - ${CONFIG}/web:/config:Z
-            - ${CONFIG}/web/letsencrypt:/etc/letsencrypt:Z
             - ${CONFIG}/transcripts:/usr/share/jitsi-meet/transcripts:Z
         environment:
             - ENABLE_AUTH
