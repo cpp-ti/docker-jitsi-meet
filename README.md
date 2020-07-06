@@ -1,3 +1,23 @@
+# CPP 
+
+Para iniciar este container basta:
+
+### Editar variáveis:
+
+Copie o arquivo `.env.example` para `.env` e edite conforme as necessidades.
+
+### Gerar as senhas seguras:
+
+Roda o comando abaixo para gerar as senhas seguras:
+
+`./gen-passwords.sh`
+
+### Iniciar:
+
+Inicie o jitsi com o comando abaixo se for utilizar ele no `traefik`:
+
+`docker-compose -f docker-compose.traefik.yml up -d --build`
+
 # Jitsi Meet on Docker
 
 ![](resources/jitsi-docker.png)
