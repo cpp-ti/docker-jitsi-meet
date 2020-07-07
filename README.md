@@ -43,6 +43,27 @@ docker-compose stop prosody
 docker-compose -f docker-compose.traefik.yml up -d --build prosody
 ```
 
+## Proibindo acesso a página inicial
+
+Adiciona este bloco no `meet.conf`:
+
+```
+location = / {
+  return 301 https://conferencia.cpp-ti.com.br;
+}
+```
+
+## Permitindo acesso somente de certos referrers:
+
+```
+location ~ ^/([^/?&:'"]+)$ {
+  if ($http_referer !~ "(https://conferencia.cpp-ti.com.br)|(https://conferencia.localhost.dev)"){
+    return 403;
+  }
+
+  try_files $uri @root_path;
+}
+```
 
 ## Sobrescrever assets
 
