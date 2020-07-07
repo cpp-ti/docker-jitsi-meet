@@ -43,6 +43,53 @@ docker-compose stop prosody
 docker-compose -f docker-compose.traefik.yml up -d --build prosody
 ```
 
+
+## Sobrescrever assets
+
+Antes de subir o container, editar o arquivo `web/rootfs/defaults/meet.conf` e adicionar:
+
+```
+location = /libs/lib-jitsi-meet.min.js {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/lib-jitsi-meet.min.js;
+}
+
+location = /libs/lib-jitsi-meet.min.map {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/lib-jitsi-meet.min.map;
+}
+
+location = /lang/main-ptBR.json {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/main-ptBR.json;
+}
+
+location = /css/all.css {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/all.css;
+}
+
+location = /libs/app.bundle.min.js {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/app.bundle.min.js;
+}
+
+location = /libs/app.bundle.min.map {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/app.bundle.min.map;
+}
+
+location = /external_api.min.js {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/external_api.min.js;
+}
+
+location = /external_api.js {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/external_api.min.js;
+}
+
+location = /external_api.min.map {
+  proxy_pass https://conferencia.cpp-ti.com.br/jitsi/external_api.min.map;
+}
+```
+
+Se já subiu o container editar o arquivo `sudo nvim ~/.jitsi-meet-cfg/web/nginx/meet.conf`.
+
+Reiniciar o container web: `docker-compose restart web`.
+
 # Jitsi Meet on Docker
 
 ![](resources/jitsi-docker.png)
