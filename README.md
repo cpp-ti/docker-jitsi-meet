@@ -18,6 +18,14 @@ Inicie o jitsi com o comando abaixo se for utilizar ele no `traefik`:
 
 `docker-compose -f docker-compose.traefik.yml up -d --build`
 
+# Desabilitar logs inúteis:
+
+Editar o arquivo `/etc/jitsi/jicofo/logging.properties` e adicionar/alterar:
+
+```
+org.jitsi.jicofo.health.Health.level=WARNING
+```
+
 # Instalando módulos personalizáveis:
 
 Para instalar os seus próprios módulos, faça um link da sua pasta de módulos com a pasta de módulos deste container, exemplo:
