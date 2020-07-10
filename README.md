@@ -20,10 +20,20 @@ Inicie o jitsi com o comando abaixo se for utilizar ele no `traefik`:
 
 # Desabilitar logs inúteis:
 
-Editar o arquivo `/etc/jitsi/jicofo/logging.properties` e adicionar/alterar:
+Editar o arquivo `~/.jitsi-meet-cfg/jvb/logging.properties` e adicionar/alterar:
 
 ```
 org.jitsi.jicofo.health.Health.level=WARNING
+```
+
+# Desabilitar controle de vídeo:
+
+O Jitsi por padrão desativa o vídeo dos participantes que estiverem com a conexão ruim. Para desativar essa opção basta:
+
+Editar o arquivo `~/.jitsi-meet-cfg/jvb/sip-communicator.properties` e adicionar/alterar:
+
+```
+org.jitsi.videobridge.TRUST_BWE=false
 ```
 
 # Instalando módulos personalizáveis:
